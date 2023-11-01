@@ -6,6 +6,7 @@ struct node
   struct node *left;
   struct node *right;
 };
+//creation
 struct node *newnode(int item)
 {
   struct node *temp=(struct node *)malloc(sizeof(struct node));
@@ -15,41 +16,36 @@ struct node *newnode(int item)
   return temp;
 }
 
-struct node* insert(struct node* root, int item) 
+//insertion
+struct node *insert(struct node *node, int data) 
 {
-    if (root == NULL)
-     {
-        return newnode(item);
-     }
+    if (node == NULL)
+        return newnode(data);
  
-    if (item < root->data) 
-    {
-        root->left = insert(root->left, item);
-    } 
-    else if (data > root->data) 
-    {
-        root->right = insert(root->right, item);
-    }
+    if (data < node->data) 
+        node->left = insert(node->left, data);
+    else
+       node->right = insert(node->right, data);
  
-    return root;
+    return node;
 }
 
-struct node* search(struct node *root,int item)
+struct node *search(struct node *root,int data)
 {
- if(root==NULL||root->data==item)
+ if(root==NULL||root->data==data)
    return root;
- else if(item>root->data)
-   return search(root->right,item);
+ if(root -> data < data)
+   return search(root->right,data);
  else
-   return search(root->left,item);
+   return search(root->left,data);
 }
 
 
-struct node* delete(struct node *root,int item)
+struct node* delete(struct node *root,int data)
 {
   if(root==NULL)
-   return NULL;
-  if(item>root->data)
+   return root;
+  if(root->data>data)
   {
     
   }
@@ -83,5 +79,3 @@ int main()
  
     return 0;
 }
-
-
